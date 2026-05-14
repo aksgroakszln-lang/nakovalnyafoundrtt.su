@@ -357,12 +357,45 @@
             filter: drop-shadow(0 1px 2px rgba(0,0,0,0.4));
             -webkit-filter: drop-shadow(0 1px 2px rgba(0,0,0,0.4));
         }
-        .full-width-img {
-            width: 100%;
-            max-width: 100%;
+
+        /* Картинка в тексте — кликабельная */
+        .clickable-inline-img {
+            display: inline-block;
+            width: auto;
+            height: 1.2em;
+            vertical-align: middle;
+            border-radius: 3px;
+            margin: 0 4px;
+            border: 1px solid rgba(200,50,30,0.4);
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+        .clickable-inline-img:hover {
+            border-color: #f08060;
+            box-shadow: 0 0 8px rgba(200,50,30,0.4);
+            transform: scale(1.1);
+        }
+
+        /* Модальное окно для картинки */
+        .image-modal-overlay {
+            display: none;
+            position: fixed;
+            inset: 0;
+            background: rgba(0,0,0,0.9);
+            z-index: 1000;
+            justify-content: center;
+            align-items: center;
+            padding: 30px;
+            cursor: pointer;
+        }
+        .image-modal-overlay.active { display: flex; }
+        .image-modal-overlay img {
+            max-width: 95%;
+            max-height: 90vh;
             border-radius: 8px;
-            margin: 10px 0;
-            border: 1px solid rgba(62, 56, 42, 0.6);
+            border: 2px solid #e67e22;
+            box-shadow: 0 0 40px rgba(230, 126, 34, 0.4);
+            cursor: default;
         }
 
         /* ===== РАЗДЕЛ НАСТРОЙКИ ===== */
@@ -798,12 +831,17 @@
     </style>
 </head>
 <body>
-<!-- Модальное окно -->
+<!-- Модальное окно для видео -->
 <div class="modal-overlay" id="videoModal">
     <div class="modal-content">
         <button class="modal-close" onclick="closeModal()">✕</button>
         <iframe id="modalFrame" src="" allow="autoplay; encrypted-media; picture-in-picture" allowfullscreen></iframe>
     </div>
+</div>
+
+<!-- Модальное окно для картинки -->
+<div class="image-modal-overlay" id="imageModal" onclick="closeImageModal()">
+    <img id="imageModalImg" src="" alt="Увеличенное изображение">
 </div>
 
 <div class="page">
@@ -928,13 +966,13 @@
             </p>
 
             <p style="margin-top:12px;">
-               <p style="margin-top:12px;">
-    Если же у вас <strong style="color:#f08060;">красный крестик</strong> и соединение закрыто — 
-    <img src="https://www.dropbox.com/scl/fi/bbw8k1ulqkam6kja7rc1w/ZJmkGCc08c-PPFJGE1hRvbV2fxjTQ1qNWjO7dKh91u_KTjIVHYEMvVxg4OOUvFhh5Infgv59LxlXYC-eeZZlO3RH.jpg?rlkey=pv1tt2xbni0grpjq6llnmkmvi&st=13s7afsr&dl=1" alt="Красный крестик" style="display:inline-block;width:auto;height:1.2em;vertical-align:middle;border-radius:3px;margin:0 4px;border:1px solid rgba(200,50,30,0.4);">
-    игроки из интернета не смогут подключиться напрямую. Нужно настроить доступ одним из способов.
-</p>
-
-            <img src="https://www.dropbox.com/scl/fi/bbw8k1ulqkam6kja7rc1w/ZJmkGCc08c-PPFJGE1hRvbV2fxjTQ1qNWjO7dKh91u_KTjIVHYEMvVxg4OOUvFhh5Infgv59LxlXYC-eeZZlO3RH.jpg?rlkey=pv1tt2xbni0grpjq6llnmkmvi&st=13s7afsr&dl=1" alt="Красный крестик" class="full-width-img">
+                Если же у вас <strong style="color:#f08060;">красный крестик</strong> и соединение закрыто — 
+                <img src="https://www.dropbox.com/scl/fi/bbw8k1ulqkam6kja7rc1w/ZJmkGCc08c-PPFJGE1hRvbV2fxjTQ1qNWjO7dKh91u_KTjIVHYEMvVxg4OOUvFhh5Infgv59LxlXYC-eeZZlO3RH.jpg?rlkey=pv1tt2xbni0grpjq6llnmkmvi&st=13s7afsr&dl=1" 
+                     alt="Красный крестик" 
+                     class="clickable-inline-img"
+                     onclick="openImageModal(this.src)">
+                — игроки из интернета не смогут подключиться напрямую. Нужно настроить доступ одним из способов.
+            </p>
 
             <h3 style="margin-top:16px;"><strong>Бесплатные методы</strong> — без статического IP</h3>
             <p style="margin-bottom:12px;">Эти способы работают без обращения к провайдеру и часто не уступают платным решениям. Из всех рабочих и стабильных можем порекомендовать:</p>
@@ -1112,6 +1150,7 @@
 </div>
 
 <script>
+    // Фон
     (function() {
         const bgUrl = 'https://www.dropbox.com/scl/fi/qyvvx56xsk8j1h81lmf7m/home-background.webp?rlkey=p6skz38llxdttgm6c13vxw9u5&st=5fzikec4&dl=1';
         const img = new Image();
@@ -1120,6 +1159,7 @@
         if (img.complete) document.body.classList.add('bg-loaded');
     })();
 
+    // Копирование в буфер обмена
     function copyToClipboard(element, text) {
         navigator.clipboard.writeText(text).then(() => {
             const originalText = element.textContent;
@@ -1129,6 +1169,7 @@
         });
     }
 
+    // Аккордеон для систем
     function toggleAccordion(header) {
         const item = header.parentElement;
         const content = item.querySelector('.system-content');
@@ -1140,6 +1181,7 @@
         else { item.classList.add('open'); content.style.maxHeight = content.scrollHeight + 'px'; }
     }
 
+    // Модальное окно для видео
     function openModal(url) {
         document.getElementById('modalFrame').src = url;
         document.getElementById('videoModal').classList.add('active');
@@ -1149,6 +1191,15 @@
         document.getElementById('videoModal').classList.remove('active');
     }
     document.getElementById('videoModal').addEventListener('click', function(e) { if (e.target === this) closeModal(); });
+
+    // Модальное окно для картинки
+    function openImageModal(src) {
+        document.getElementById('imageModalImg').src = src;
+        document.getElementById('imageModal').classList.add('active');
+    }
+    function closeImageModal() {
+        document.getElementById('imageModal').classList.remove('active');
+    }
 </script>
 </body>
 </html>
