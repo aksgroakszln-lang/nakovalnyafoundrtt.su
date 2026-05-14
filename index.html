@@ -310,6 +310,43 @@
             50% { box-shadow: 0 0 28px rgba(230, 126, 34, 0.55), 0 4px 12px rgba(0,0,0,0.5); }
         }
 
+        /* ===== ОСОБОЕ ПРАВИЛО ===== */
+        .highlight-rule {
+            background: rgba(230, 126, 34, 0.15);
+            border: 1px solid rgba(230, 126, 34, 0.5);
+            border-radius: 8px;
+            padding: 14px 16px;
+            margin: 12px 0;
+            display: flex;
+            align-items: flex-start;
+            gap: 10px;
+            animation: subtle-pulse 2.5s infinite;
+        }
+        @keyframes subtle-pulse {
+            0%, 100% { border-color: rgba(230, 126, 34, 0.4); }
+            50% { border-color: rgba(230, 126, 34, 0.8); }
+        }
+        .highlight-rule .rule-icon {
+            font-size: 1.4rem;
+            flex-shrink: 0;
+            margin-top: 1px;
+        }
+        .highlight-rule .rule-text {
+            font-size: 0.88rem;
+            color: #f5efe0;
+            line-height: 1.5;
+        }
+        .highlight-rule .rule-text strong {
+            color: #f0a040;
+            font-weight: 700;
+        }
+        .highlight-rule .rule-text a {
+            color: #f0a040;
+            font-weight: 600;
+            text-decoration: underline;
+            text-underline-offset: 2px;
+        }
+
         /* ===== РАЗДЕЛ НАСТРОЙКИ ===== */
         .section-divider {
             text-align: center;
@@ -445,6 +482,44 @@
         .btn:hover {
             background: linear-gradient(180deg, #e58a35 0%, #c96d22 100%);
             box-shadow: 0 4px 14px rgba(230, 126, 34, 0.3);
+        }
+
+        /* Копируемый код */
+        .copy-code {
+            display: inline-block;
+            background: #1a1915;
+            padding: 4px 10px;
+            border-radius: 4px;
+            color: #f0a040;
+            font-family: 'SF Mono', 'Consolas', monospace;
+            cursor: pointer;
+            transition: all 0.2s;
+            border: 1px solid transparent;
+            position: relative;
+        }
+        .copy-code:hover {
+            border-color: #e67e22;
+            background: #2a2418;
+        }
+        .copy-code::after {
+            content: 'Нажмите, чтобы скопировать';
+            position: absolute;
+            bottom: calc(100% + 6px);
+            left: 50%;
+            transform: translateX(-50%);
+            background: #1a1915;
+            color: #b0a590;
+            font-size: 0.65rem;
+            padding: 4px 8px;
+            border-radius: 4px;
+            white-space: nowrap;
+            pointer-events: none;
+            opacity: 0;
+            transition: opacity 0.2s;
+            font-family: 'Inter', sans-serif;
+        }
+        .copy-code:hover::after {
+            opacity: 1;
         }
 
         /* ===== ВЫЕЗЖАЮЩАЯ ПАНЕЛЬ С ВИДЕО ===== */
@@ -820,7 +895,7 @@
     <div class="setup-section">
 
         <!-- 1. Активация -->
-        <div class="card">
+        <div class="card" id="card-activation">
             <h2><span class="num">1</span> Активация лицензии</h2>
             <div class="video-row">
                 <span class="video-btn-label">Видеоинструкция:</span>
@@ -832,7 +907,14 @@
                 <li>Введите ключ при первом запуске</li>
                 <li>Примите лицензионное соглашение</li>
             </ul>
-            <p style="font-size:0.8rem;color:#8a8270;">Один ключ — одно одновременное подключение</p>
+
+            <div class="highlight-rule">
+                <span class="rule-icon">💡</span>
+                <span class="rule-text">
+                    <strong>Один ключ — одна сессия FoundryVTT.</strong><br>
+                    Это правило означает, что ваш ключ может работать только на одном устройстве. Если вы планируете сменить ПК, пожалуйста, обратитесь к нам в <a href="https://vk.com/foundryyy" target="_blank" rel="noopener">группу</a>.
+                </span>
+            </div>
             <div class="video-panel">
                 <div class="video-wrapper">
                     <iframe src="" allow="autoplay; encrypted-media; picture-in-picture" allowfullscreen></iframe>
@@ -841,7 +923,7 @@
         </div>
 
         <!-- 2. Модули -->
-        <div class="card">
+        <div class="card" id="card-modules">
             <h2><span class="num">2</span> Установка модулей и систем</h2>
             <div class="video-row">
                 <span class="video-btn-label">Видеоинструкция:</span>
@@ -849,17 +931,22 @@
                     Смотреть видео <span class="arrow-icon">▼</span>
                 </button>
             </div>
+            <p style="font-size:0.85rem;color:#8a8270;margin-bottom:12px;">
+                Если модули и системы устанавливаются, пропускаем этот пункт и идём дальше.
+            </p>
             <div class="warning">
                 <strong>ВНИМАНИЕ!</strong> Если модули и системы не устанавливаются:
             </div>
-            <h3>Способ 1: Zapret</h3>
-            <p>Пропишите в <strong>list-general</strong>: <code style="background:#1a1915;padding:2px 8px;border-radius:4px;color:#f0a040;">foundryvtt.com</code></p>
-            <h3>Способ 2: Вручную</h3>
+            <h3>Способ: <a href="https://github.com/flowseal/zapret-discord-youtube" target="_blank" rel="noopener">Zapret</a></h3>
             <ol style="color:#b0a590;font-size:0.88rem;padding-left:20px;">
-                <li>Папка Zapret → list → текстовый файл</li>
-                <li>Добавить: <code style="background:#1a1915;padding:2px 6px;border-radius:4px;color:#f0a040;">amazon.com</code> и <code style="background:#1a1915;padding:2px 6px;border-radius:4px;color:#f0a040;">foundryvtt.com</code></li>
-                <li>Перезапустить Zapret</li>
+                <li>Откройте папку Zapret → <strong>list</strong> → текстовый файл <strong>list-general.txt</strong></li>
+                <li>Добавьте в него строки:
+                    <br><span class="copy-code" onclick="copyToClipboard(this, 'foundryvtt.com')">foundryvtt.com</span>
+                    <br><span class="copy-code" onclick="copyToClipboard(this, 'amazon.com')">amazon.com</span>
+                </li>
+                <li>Перезапустите Zapret</li>
             </ol>
+            <p style="font-size:0.8rem;color:#8a8270;">Подсказка: наведитесь на домен и нажмите, чтобы скопировать.</p>
             <div class="video-panel">
                 <div class="video-wrapper">
                     <iframe src="" allow="autoplay; encrypted-media; picture-in-picture" allowfullscreen></iframe>
@@ -868,7 +955,7 @@
         </div>
 
         <!-- 3. Сервер -->
-        <div class="card">
+        <div class="card" id="card-server">
             <h2><span class="num">3</span> Настройка сервера</h2>
             <div class="video-row">
                 <span class="video-btn-label">Видеоинструкция:</span>
@@ -878,12 +965,20 @@
             </div>
             <h3>Оффлайн-игра</h3>
             <p>Создайте игровой мир и транслируйте экран с аккаунта игрока.</p>
-            <h3>Для подключения игроков</h3>
+
+            <h3>Для подключения игроков через интернет</h3>
+            <p style="margin-bottom:12px;">По умолчанию Foundry VTT работает на порту <strong>30000</strong> и доступен только внутри вашей локальной сети. Чтобы игроки из интернета могли подключиться, нужен внешний доступ. Есть два пути:</p>
+
+            <h4 style="color:#e8e0d0;font-size:0.9rem;margin-bottom:6px;">Платный метод — статический IP</h4>
+            <p>Обратитесь к своему интернет-провайдеру и запросите <strong>статический IP-адрес</strong>. Это стоит определённую сумму (обычно 100–300 ₽ в месяц), но даёт вам постоянный адрес, по которому игроки всегда смогут найти ваш сервер. После получения статического IP нужно будет настроить проброс порта <strong>30000</strong> на вашем роутере.</p>
+
+            <h4 style="color:#e8e0d0;font-size:0.9rem;margin:12px 0 6px;">Бесплатные методы — без статического IP</h4>
+            <p style="margin-bottom:8px;">Из всех рабочих и стабильных бесплатных методов можем порекомендовать:</p>
             <ul>
-                <li>Проброс порта <strong>30000</strong> в роутере</li>
-                <li>Или используйте: <a href="https://www.radmin-vpn.com/" target="_blank" rel="noopener">Radmin VPN</a> / <a href="https://cloudpub.ru/" target="_blank" rel="noopener">Cloudpub</a></li>
+                <li><a href="https://www.radmin-vpn.com/" target="_blank" rel="noopener">Radmin VPN</a> — создайте виртуальную локальную сеть. Все игроки подключаются к одной сети, и Foundry становится доступен без проброса портов.</li>
+                <li><a href="https://cloudpub.ru/" target="_blank" rel="noopener">Cloudpub</a> — сервис туннелирования портов. Установите программу, и она выдаст внешний адрес, который вы дадите игрокам.</li>
             </ul>
-            <p style="margin-top:8px;"><a href="https://vk.com/@foundryyy-zatestitit-foundry" target="_blank" rel="noopener">Гайд по подключению игроков</a></p>
+            <p style="margin-top:8px;">📚 <a href="https://vk.com/@foundryyy-zatestitit-foundry" target="_blank" rel="noopener">Гайд по подключению игроков</a></p>
             <div class="video-panel">
                 <div class="video-wrapper">
                     <iframe src="" allow="autoplay; encrypted-media; picture-in-picture" allowfullscreen></iframe>
@@ -892,7 +987,7 @@
         </div>
 
         <!-- 4. Гайды по системам -->
-        <div class="card">
+        <div class="card" id="card-guides">
             <h2>
                 <span class="num">4</span> Гайды по игровым системам
             </h2>
@@ -1111,18 +1206,40 @@
         if (img.complete) document.body.classList.add('bg-loaded');
     })();
 
+    // Копирование в буфер обмена
+    function copyToClipboard(element, text) {
+        navigator.clipboard.writeText(text).then(() => {
+            const originalText = element.textContent;
+            element.textContent = 'Скопировано!';
+            element.style.color = '#4caf50';
+            setTimeout(() => {
+                element.textContent = originalText;
+                element.style.color = '#f0a040';
+            }, 1200);
+        });
+    }
+
     // Выезжающая панель с видео
     function toggleVideo(btn, videoUrl) {
         const card = btn.closest('.card');
         const panel = card.querySelector('.video-panel');
-        const iframe = panel.querySelector('iframe');
+        const iframe = panel ? panel.querySelector('iframe') : null;
+        
+        if (!panel || !iframe) {
+            console.warn('Video panel not found in card:', card);
+            return;
+        }
+
         const isOpen = panel.classList.contains('open');
 
+        // Закрываем все остальные панели
         document.querySelectorAll('.video-panel.open').forEach(p => {
             if (p !== panel) {
                 p.classList.remove('open');
-                p.querySelector('iframe').src = '';
-                p.closest('.card').querySelector('.video-toggle-btn')?.classList.remove('open');
+                const otherIframe = p.querySelector('iframe');
+                if (otherIframe) otherIframe.src = '';
+                const otherBtn = p.closest('.card')?.querySelector('.video-toggle-btn');
+                if (otherBtn) otherBtn.classList.remove('open');
             }
         });
 
