@@ -347,6 +347,24 @@
             text-underline-offset: 2px;
         }
 
+        /* ===== КАРТИНКА В ТЕКСТЕ ===== */
+        .inline-icon {
+            display: inline-block;
+            width: 22px;
+            height: 22px;
+            vertical-align: middle;
+            margin: 0 2px;
+            filter: drop-shadow(0 1px 2px rgba(0,0,0,0.4));
+            -webkit-filter: drop-shadow(0 1px 2px rgba(0,0,0,0.4));
+        }
+        .full-width-img {
+            width: 100%;
+            max-width: 100%;
+            border-radius: 8px;
+            margin: 10px 0;
+            border: 1px solid rgba(62, 56, 42, 0.6);
+        }
+
         /* ===== РАЗДЕЛ НАСТРОЙКИ ===== */
         .section-divider {
             text-align: center;
@@ -403,6 +421,12 @@
             color: #f0a040;
             margin: 14px 0 6px;
         }
+        .card h4 {
+            font-size: 0.9rem;
+            font-weight: 600;
+            color: #e8e0d0;
+            margin: 12px 0 6px;
+        }
         .card p, .card li {
             font-size: 0.88rem;
             color: #b0a590;
@@ -428,27 +452,6 @@
             text-underline-offset: 2px;
         }
         .card a:hover { color: #f5c070; }
-
-        .version-box {
-            background: rgba(28, 25, 21, 0.7);
-            border: 1px solid rgba(230, 126, 34, 0.3);
-            border-radius: 8px;
-            padding: 14px 16px;
-            margin: 10px 0;
-            display: flex;
-            align-items: center;
-            flex-wrap: wrap;
-            gap: 10px;
-        }
-        .version-box .ver {
-            font-size: 1.3rem;
-            font-weight: 700;
-            color: #f0a040;
-            background: rgba(230,126,34,0.12);
-            padding: 2px 10px;
-            border-radius: 5px;
-            font-family: 'SF Mono', 'Consolas', monospace;
-        }
 
         .warning {
             background: rgba(200, 50, 30, 0.12);
@@ -522,78 +525,62 @@
             opacity: 1;
         }
 
-        /* ===== ВЫЕЗЖАЮЩАЯ ПАНЕЛЬ С ВИДЕО ===== */
-        .video-row {
+        /* ===== ПЛИТКА ВИДЕО ДЛЯ ПУНКТОВ 1-3 ===== */
+        .setup-videos-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+            gap: 10px;
+            margin-top: 8px;
+        }
+
+        .setup-video-tile {
+            background: rgba(28, 25, 21, 0.85);
+            border: 1px solid rgba(62, 56, 42, 0.8);
+            border-radius: 8px;
+            overflow: hidden;
+            cursor: pointer;
+            transition: all 0.2s;
+            aspect-ratio: 16 / 10;
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 12px 8px;
+            text-decoration: none;
+        }
+        .setup-video-tile:hover {
+            border-color: #e67e22;
+            box-shadow: 0 0 0 2px rgba(230, 126, 34, 0.25);
+            transform: translateY(-2px);
+        }
+        .setup-video-tile .tile-icon {
+            font-size: 1.4rem;
+            margin-bottom: 6px;
+            color: #e67e22;
+            opacity: 0.9;
+        }
+        .setup-video-tile .tile-title {
+            font-size: 0.75rem;
+            color: #e8e0d0;
+            font-weight: 500;
+            line-height: 1.35;
+        }
+        .setup-video-tile .tile-play {
+            position: absolute;
+            top: 6px;
+            right: 8px;
+            background: rgba(200, 50, 30, 0.85);
+            color: #fff;
+            width: 22px;
+            height: 22px;
+            border-radius: 50%;
             display: flex;
             align-items: center;
-            gap: 10px;
-            margin-bottom: 12px;
-        }
-        .video-btn-label {
-            font-size: 0.8rem;
-            color: #f08060;
-            font-weight: 500;
-            letter-spacing: 0.3px;
-        }
-
-        .video-toggle-btn {
-            display: inline-flex;
-            align-items: center;
-            gap: 6px;
-            background: rgba(200, 50, 30, 0.18);
-            border: 1px solid #c8321e;
-            color: #f08060;
-            font-weight: 600;
-            font-size: 0.78rem;
-            padding: 6px 14px;
-            border-radius: 20px;
-            cursor: pointer;
-            transition: all 0.3s;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-        }
-        .video-toggle-btn .arrow-icon {
-            display: inline-block;
-            transition: transform 0.35s ease;
-            font-size: 0.7rem;
-        }
-        .video-toggle-btn.open {
-            background: rgba(200, 50, 30, 0.35);
-            border-color: #f08060;
-            color: #fff;
-        }
-        .video-toggle-btn.open .arrow-icon { transform: rotate(180deg); }
-        .video-toggle-btn:hover {
-            background: rgba(200, 50, 30, 0.35);
-            border-color: #f08060;
-            color: #fff;
-        }
-
-        .video-panel {
-            max-height: 0;
-            overflow: hidden;
-            transition: max-height 0.4s ease, margin 0.4s ease, border 0.4s ease;
-            background: rgba(20, 18, 14, 0.7);
-            border-radius: 8px;
-            margin-top: 0;
-            border: 1px solid transparent;
-        }
-        .video-panel.open {
-            max-height: 600px;
-            margin-top: 12px;
-            margin-bottom: 8px;
-            border: 1px solid rgba(200, 50, 30, 0.4);
-        }
-        .video-wrapper {
-            position: relative;
-            width: 100%;
-            aspect-ratio: 16 / 9;
-        }
-        .video-wrapper iframe {
-            width: 100%;
-            height: 100%;
-            border: none;
-            border-radius: 6px;
+            justify-content: center;
+            font-size: 0.6rem;
+            line-height: 1;
         }
 
         /* ===== АККОРДЕОН ДЛЯ СИСТЕМ ===== */
@@ -804,7 +791,7 @@
 
         @media (max-width: 700px) {
             .download-section { flex-direction: column; }
-            .videos-grid {
+            .videos-grid, .setup-videos-grid {
                 grid-template-columns: repeat(auto-fill, minmax(130px, 1fr));
             }
         }
@@ -842,42 +829,24 @@
         </div>
 
         <div class="btns-col">
-            <!-- Windows -->
             <a href="https://www.dropbox.com/scl/fi/7nqrb2eofwei032s94o62/FoundryVTT-13.351-Setup-2.exe?rlkey=o4nhn1gf6w2pvkbv4sxlymcg9&st=wd1j9gf0&dl=1" class="dl-btn" target="_blank" rel="noopener">
                 <span class="icon">🖥️</span>
-                <span class="meta">
-                    <span class="name">Скачать для Windows</span>
-                    <span class="info">FoundryVTT 13.351 <span class="sep"></span> Установщик .exe</span>
-                </span>
+                <span class="meta"><span class="name">Скачать для Windows</span><span class="info">FoundryVTT 13.351 <span class="sep"></span> Установщик .exe</span></span>
                 <span class="arr">→</span>
             </a>
-
-            <!-- macOS -->
             <a href="https://www.dropbox.com/scl/fi/s27ice1aisl147u5etqe3/FoundryVTT-13.351.dmg?rlkey=1hp9oocklmi7tg9ox733xuu27&st=yxzzv5l4&dl=1" class="dl-btn" target="_blank" rel="noopener">
                 <span class="icon">🍎</span>
-                <span class="meta">
-                    <span class="name">Скачать для macOS</span>
-                    <span class="info">FoundryVTT 13.351 <span class="sep"></span> Образ .dmg</span>
-                </span>
+                <span class="meta"><span class="name">Скачать для macOS</span><span class="info">FoundryVTT 13.351 <span class="sep"></span> Образ .dmg</span></span>
                 <span class="arr">→</span>
             </a>
-
-            <!-- Linux -->
             <a href="https://www.dropbox.com/scl/fi/xemk4zlj65f2ugenw0o4e/FoundryVTT-Linux-13.351.zip?rlkey=9np7ajwn7qita3vtmwiz7gaoo&st=iktprsg1&dl=1" class="dl-btn" target="_blank" rel="noopener">
                 <span class="icon">🐧</span>
-                <span class="meta">
-                    <span class="name">Скачать для Linux</span>
-                    <span class="info">FoundryVTT 13.351 <span class="sep"></span> Архив .zip</span>
-                </span>
+                <span class="meta"><span class="name">Скачать для Linux</span><span class="info">FoundryVTT 13.351 <span class="sep"></span> Архив .zip</span></span>
                 <span class="arr">→</span>
             </a>
-
-            <!-- Архив -->
             <a href="https://drive.google.com/drive/folders/1WCLZs5lXcEN3gSr6aVFSlPKowVYbj6fS?usp=sharing" class="archive-btn" target="_blank" rel="noopener">
                 📂 Открыть архив всех версий →
             </a>
-
-            <!-- Настройка -->
             <a href="#setup" class="setup-btn">
                 <span class="setup-icon">🔑</span>
                 Настройка Foundry VTT
@@ -894,20 +863,13 @@
     <!-- РАЗДЕЛ НАСТРОЙКИ -->
     <div class="setup-section">
 
-        <!-- 1. Активация -->
+        <!-- 1. Активация (плитка видео) -->
         <div class="card" id="card-activation">
             <h2><span class="num">1</span> Активация лицензии</h2>
-            <div class="video-row">
-                <span class="video-btn-label">Видеоинструкция:</span>
-                <button class="video-toggle-btn" onclick="toggleVideo(this, 'https://www.youtube.com/embed/tPLXjfYZT0o')">
-                    Смотреть видео <span class="arrow-icon">▼</span>
-                </button>
-            </div>
             <ul>
                 <li>Введите ключ при первом запуске</li>
                 <li>Примите лицензионное соглашение</li>
             </ul>
-
             <div class="highlight-rule">
                 <span class="rule-icon">💡</span>
                 <span class="rule-text">
@@ -915,22 +877,24 @@
                     Это правило означает, что ваш ключ может работать только на одном устройстве. Если вы планируете сменить ПК, пожалуйста, обратитесь к нам в <a href="https://vk.com/foundryyy" target="_blank" rel="noopener">группу</a>.
                 </span>
             </div>
-            <div class="video-panel">
-                <div class="video-wrapper">
-                    <iframe src="" allow="autoplay; encrypted-media; picture-in-picture" allowfullscreen></iframe>
+            <h3>Видео по теме</h3>
+            <div class="setup-videos-grid">
+                <div class="setup-video-tile" onclick="openModal('https://www.youtube.com/embed/tPLXjfYZT0o')">
+                    <span class="tile-play">▶</span>
+                    <span class="tile-icon">&#9670;</span>
+                    <span class="tile-title">Активация лицензии</span>
+                </div>
+                <div class="setup-video-tile" onclick="openModal('https://www.youtube.com/embed/tPLXjfYZT0o')">
+                    <span class="tile-play">▶</span>
+                    <span class="tile-icon">&#9670;</span>
+                    <span class="tile-title">Первый запуск Foundry</span>
                 </div>
             </div>
         </div>
 
-        <!-- 2. Модули -->
+        <!-- 2. Модули (плитка видео) -->
         <div class="card" id="card-modules">
             <h2><span class="num">2</span> Установка модулей и систем</h2>
-            <div class="video-row">
-                <span class="video-btn-label">Видеоинструкция:</span>
-                <button class="video-toggle-btn" onclick="toggleVideo(this, 'https://www.youtube.com/embed/tPLXjfYZT0o')">
-                    Смотреть видео <span class="arrow-icon">▼</span>
-                </button>
-            </div>
             <p style="font-size:0.85rem;color:#8a8270;margin-bottom:12px;">
                 Если модули и системы устанавливаются, пропускаем этот пункт и идём дальше.
             </p>
@@ -947,50 +911,73 @@
                 <li>Перезапустите Zapret</li>
             </ol>
             <p style="font-size:0.8rem;color:#8a8270;">Подсказка: наведитесь на домен и нажмите, чтобы скопировать.</p>
-            <div class="video-panel">
-                <div class="video-wrapper">
-                    <iframe src="" allow="autoplay; encrypted-media; picture-in-picture" allowfullscreen></iframe>
+            <h3>Видео по теме</h3>
+            <div class="setup-videos-grid">
+                <div class="setup-video-tile" onclick="openModal('https://www.youtube.com/embed/tPLXjfYZT0o')">
+                    <span class="tile-play">▶</span>
+                    <span class="tile-icon">&#9670;</span>
+                    <span class="tile-title">Настройка Zapret</span>
+                </div>
+                <div class="setup-video-tile" onclick="openModal('https://www.youtube.com/embed/tPLXjfYZT0o')">
+                    <span class="tile-play">▶</span>
+                    <span class="tile-icon">&#9670;</span>
+                    <span class="tile-title">Установка модулей</span>
                 </div>
             </div>
         </div>
 
-        <!-- 3. Сервер -->
+        <!-- 3. Подключение (плитка видео) -->
         <div class="card" id="card-server">
-            <h2><span class="num">3</span> Настройка сервера</h2>
-            <div class="video-row">
-                <span class="video-btn-label">Видеоинструкция:</span>
-                <button class="video-toggle-btn" onclick="toggleVideo(this, 'https://www.youtube.com/embed/tPLXjfYZT0o')">
-                    Смотреть видео <span class="arrow-icon">▼</span>
-                </button>
-            </div>
-            <h3>Оффлайн-игра</h3>
-            <p>Создайте игровой мир и транслируйте экран с аккаунта игрока.</p>
+            <h2><span class="num">3</span> Настройка подключения для игроков</h2>
 
-            <h3>Для подключения игроков через интернет</h3>
-            <p style="margin-bottom:12px;">По умолчанию Foundry VTT работает на порту <strong>30000</strong> и доступен только внутри вашей локальной сети. Чтобы игроки из интернета могли подключиться, нужен внешний доступ. Есть два пути:</p>
+            <h3>Проверка доступа</h3>
+            <p>
+                Первым делом, после запуска игрового мира и установки систем и модулей — зайдите в настройки и найдите значок 
+                <img src="https://www.dropbox.com/scl/fi/7ihihejf7zgawypd0xoxi/free-icon-wifi-sign-8152.png?rlkey=jffba9rvsu76genayvrdzqnmr&st=di1omwhw&dl=1" alt="WiFi" class="inline-icon">
+                (Wi-Fi/сеть). Если в пункте «Интернет» стоит <strong style="color:#4caf50;">зелёная галочка</strong> — поздравляем! Просто скопируйте ссылку «Интернет» и отправьте игрокам. Никаких дополнительных настроек не нужно.
+            </p>
 
-            <h4 style="color:#e8e0d0;font-size:0.9rem;margin-bottom:6px;">Платный метод — статический IP</h4>
-            <p>Обратитесь к своему интернет-провайдеру и запросите <strong>статический IP-адрес</strong>. Это стоит определённую сумму (обычно 100–300 ₽ в месяц), но даёт вам постоянный адрес, по которому игроки всегда смогут найти ваш сервер. После получения статического IP нужно будет настроить проброс порта <strong>30000</strong> на вашем роутере.</p>
+            <p style="margin-top:12px;">
+                Если же у вас <strong style="color:#f08060;">красный крестик</strong> и соединение закрыто, как на примере ниже — игроки из интернета не смогут подключиться напрямую. Нужно настроить доступ одним из способов.
+            </p>
 
-            <h4 style="color:#e8e0d0;font-size:0.9rem;margin:12px 0 6px;">Бесплатные методы — без статического IP</h4>
-            <p style="margin-bottom:8px;">Из всех рабочих и стабильных бесплатных методов можем порекомендовать:</p>
-            <ul>
-                <li><a href="https://www.radmin-vpn.com/" target="_blank" rel="noopener">Radmin VPN</a> — создайте виртуальную локальную сеть. Все игроки подключаются к одной сети, и Foundry становится доступен без проброса портов.</li>
-                <li><a href="https://cloudpub.ru/" target="_blank" rel="noopener">Cloudpub</a> — сервис туннелирования портов. Установите программу, и она выдаст внешний адрес, который вы дадите игрокам.</li>
-            </ul>
-            <p style="margin-top:8px;">📚 <a href="https://vk.com/@foundryyy-zatestitit-foundry" target="_blank" rel="noopener">Гайд по подключению игроков</a></p>
-            <div class="video-panel">
-                <div class="video-wrapper">
-                    <iframe src="" allow="autoplay; encrypted-media; picture-in-picture" allowfullscreen></iframe>
+            <img src="https://www.dropbox.com/scl/fi/bbw8k1ulqkam6kja7rc1w/ZJmkGCc08c-PPFJGE1hRvbV2fxjTQ1qNWjO7dKh91u_KTjIVHYEMvVxg4OOUvFhh5Infgv59LxlXYC-eeZZlO3RH.jpg?rlkey=pv1tt2xbni0grpjq6llnmkmvi&st=13s7afsr&dl=1" alt="Красный крестик" class="full-width-img">
+
+            <h3 style="margin-top:16px;"><strong>Бесплатные методы</strong> — без статического IP</h3>
+            <p style="margin-bottom:12px;">Эти способы работают без обращения к провайдеру и часто не уступают платным решениям. Из всех рабочих и стабильных можем порекомендовать:</p>
+
+            <h4>Cloudpub — туннелирование портов</h4>
+            <p>Установите программу, и она выдаст внешний адрес, который вы дадите игрокам. Быстрый и простой способ.</p>
+            <p style="margin-top:4px;">📚 <a href="https://vk.com/@foundryyy-zatestitit-foundry" target="_blank" rel="noopener">Подробный гайд по Cloudpub</a></p>
+
+            <h4>Radmin VPN — виртуальная сеть</h4>
+            <p>Вы создаёте виртуальную локальную сеть. Все игроки подключаются к ней — и Foundry становится доступен без проброса портов.</p>
+            <p style="font-size:0.82rem;color:#8a8270;">Важно: создателем сети должен быть гейммастер. Все участники подключаются к одной сети через Radmin.</p>
+            <p style="margin-top:4px;"><a href="https://www.radmin-vpn.com/" target="_blank" rel="noopener">Скачать Radmin VPN</a></p>
+
+            <h3>Видео по теме</h3>
+            <div class="setup-videos-grid">
+                <div class="setup-video-tile" onclick="openModal('https://www.youtube.com/embed/tPLXjfYZT0o')">
+                    <span class="tile-play">▶</span>
+                    <span class="tile-icon">&#9670;</span>
+                    <span class="tile-title">Настройка Cloudpub</span>
+                </div>
+                <div class="setup-video-tile" onclick="openModal('https://www.youtube.com/embed/tPLXjfYZT0o')">
+                    <span class="tile-play">▶</span>
+                    <span class="tile-icon">&#9670;</span>
+                    <span class="tile-title">Настройка Radmin VPN</span>
+                </div>
+                <div class="setup-video-tile" onclick="openModal('https://www.youtube.com/embed/tPLXjfYZT0o')">
+                    <span class="tile-play">▶</span>
+                    <span class="tile-icon">&#9670;</span>
+                    <span class="tile-title">Проброс портов</span>
                 </div>
             </div>
         </div>
 
         <!-- 4. Гайды по системам -->
         <div class="card" id="card-guides">
-            <h2>
-                <span class="num">4</span> Гайды по игровым системам
-            </h2>
+            <h2><span class="num">4</span> Гайды по игровым системам</h2>
             <p style="font-size:0.85rem;color:#b0a590;margin-bottom:14px;">
                 Выберите систему, чтобы посмотреть подборку видео по настройке и игре.
             </p>
@@ -1006,10 +993,10 @@
                     <div class="system-content" style="max-height: 500px;">
                         <div class="system-content-inner">
                             <div class="videos-grid">
-                                <div class="video-tile" onclick="openModal('https://www.youtube.com/embed/tPLXjfYZT0o')">
+                                <div class="video-tile" onclick="openModal('https://dzen.ru/video/watch/6a05c042208c506aa81d78c5')">
                                     <span class="tile-play">▶</span>
                                     <span class="tile-icon">&#9670;</span>
-                                    <span class="tile-title">Базовые механики</span>
+                                    <span class="tile-title">Большой гайд по FoundryVTT</span>
                                 </div>
                                 <div class="video-tile" onclick="openModal('https://www.youtube.com/embed/tPLXjfYZT0o')">
                                     <span class="tile-play">▶</span>
@@ -1030,7 +1017,6 @@
                         </div>
                     </div>
                 </div>
-
                 <!-- DnD 2024 -->
                 <div class="system-item">
                     <div class="system-header" onclick="toggleAccordion(this)">
@@ -1041,26 +1027,13 @@
                     <div class="system-content">
                         <div class="system-content-inner">
                             <div class="videos-grid">
-                                <div class="video-tile" onclick="openModal('https://www.youtube.com/embed/tPLXjfYZT0o')">
-                                    <span class="tile-play">▶</span>
-                                    <span class="tile-icon">&#9670;</span>
-                                    <span class="tile-title">Что нового в 2024</span>
-                                </div>
-                                <div class="video-tile" onclick="openModal('https://www.youtube.com/embed/tPLXjfYZT0o')">
-                                    <span class="tile-play">▶</span>
-                                    <span class="tile-icon">&#9670;</span>
-                                    <span class="tile-title">Обновлённые классы</span>
-                                </div>
-                                <div class="video-tile" onclick="openModal('https://www.youtube.com/embed/tPLXjfYZT0o')">
-                                    <span class="tile-play">▶</span>
-                                    <span class="tile-icon">&#9670;</span>
-                                    <span class="tile-title">Изменения правил</span>
-                                </div>
+                                <div class="video-tile" onclick="openModal('https://www.youtube.com/embed/tPLXjfYZT0o')"><span class="tile-play">▶</span><span class="tile-icon">&#9670;</span><span class="tile-title">Что нового в 2024</span></div>
+                                <div class="video-tile" onclick="openModal('https://www.youtube.com/embed/tPLXjfYZT0o')"><span class="tile-play">▶</span><span class="tile-icon">&#9670;</span><span class="tile-title">Обновлённые классы</span></div>
+                                <div class="video-tile" onclick="openModal('https://www.youtube.com/embed/tPLXjfYZT0o')"><span class="tile-play">▶</span><span class="tile-icon">&#9670;</span><span class="tile-title">Изменения правил</span></div>
                             </div>
                         </div>
                     </div>
                 </div>
-
                 <!-- Pathfinder -->
                 <div class="system-item">
                     <div class="system-header" onclick="toggleAccordion(this)">
@@ -1071,26 +1044,13 @@
                     <div class="system-content">
                         <div class="system-content-inner">
                             <div class="videos-grid">
-                                <div class="video-tile" onclick="openModal('https://www.youtube.com/embed/tPLXjfYZT0o')">
-                                    <span class="tile-play">▶</span>
-                                    <span class="tile-icon">&#9670;</span>
-                                    <span class="tile-title">Старт в Pathfinder</span>
-                                </div>
-                                <div class="video-tile" onclick="openModal('https://www.youtube.com/embed/tPLXjfYZT0o')">
-                                    <span class="tile-play">▶</span>
-                                    <span class="tile-icon">&#9670;</span>
-                                    <span class="tile-title">Создание персонажа</span>
-                                </div>
-                                <div class="video-tile" onclick="openModal('https://www.youtube.com/embed/tPLXjfYZT0o')">
-                                    <span class="tile-play">▶</span>
-                                    <span class="tile-icon">&#9670;</span>
-                                    <span class="tile-title">Режим разведки</span>
-                                </div>
+                                <div class="video-tile" onclick="openModal('https://www.youtube.com/embed/tPLXjfYZT0o')"><span class="tile-play">▶</span><span class="tile-icon">&#9670;</span><span class="tile-title">Старт в Pathfinder</span></div>
+                                <div class="video-tile" onclick="openModal('https://www.youtube.com/embed/tPLXjfYZT0o')"><span class="tile-play">▶</span><span class="tile-icon">&#9670;</span><span class="tile-title">Создание персонажа</span></div>
+                                <div class="video-tile" onclick="openModal('https://www.youtube.com/embed/tPLXjfYZT0o')"><span class="tile-play">▶</span><span class="tile-icon">&#9670;</span><span class="tile-title">Режим разведки</span></div>
                             </div>
                         </div>
                     </div>
                 </div>
-
                 <!-- Cyberpunk RED -->
                 <div class="system-item">
                     <div class="system-header" onclick="toggleAccordion(this)">
@@ -1101,26 +1061,13 @@
                     <div class="system-content">
                         <div class="system-content-inner">
                             <div class="videos-grid">
-                                <div class="video-tile" onclick="openModal('https://www.youtube.com/embed/tPLXjfYZT0o')">
-                                    <span class="tile-play">▶</span>
-                                    <span class="tile-icon">&#9670;</span>
-                                    <span class="tile-title">Мир Cyberpunk RED</span>
-                                </div>
-                                <div class="video-tile" onclick="openModal('https://www.youtube.com/embed/tPLXjfYZT0o')">
-                                    <span class="tile-play">▶</span>
-                                    <span class="tile-icon">&#9670;</span>
-                                    <span class="tile-title">Нетраннинг</span>
-                                </div>
-                                <div class="video-tile" onclick="openModal('https://www.youtube.com/embed/tPLXjfYZT0o')">
-                                    <span class="tile-play">▶</span>
-                                    <span class="tile-icon">&#9670;</span>
-                                    <span class="tile-title">Бой и импланты</span>
-                                </div>
+                                <div class="video-tile" onclick="openModal('https://www.youtube.com/embed/tPLXjfYZT0o')"><span class="tile-play">▶</span><span class="tile-icon">&#9670;</span><span class="tile-title">Мир Cyberpunk RED</span></div>
+                                <div class="video-tile" onclick="openModal('https://www.youtube.com/embed/tPLXjfYZT0o')"><span class="tile-play">▶</span><span class="tile-icon">&#9670;</span><span class="tile-title">Нетраннинг</span></div>
+                                <div class="video-tile" onclick="openModal('https://www.youtube.com/embed/tPLXjfYZT0o')"><span class="tile-play">▶</span><span class="tile-icon">&#9670;</span><span class="tile-title">Бой и импланты</span></div>
                             </div>
                         </div>
                     </div>
                 </div>
-
                 <!-- Cyberpunk 2020 -->
                 <div class="system-item">
                     <div class="system-header" onclick="toggleAccordion(this)">
@@ -1131,21 +1078,12 @@
                     <div class="system-content">
                         <div class="system-content-inner">
                             <div class="videos-grid">
-                                <div class="video-tile" onclick="openModal('https://www.youtube.com/embed/tPLXjfYZT0o')">
-                                    <span class="tile-play">▶</span>
-                                    <span class="tile-icon">&#9670;</span>
-                                    <span class="tile-title">Классика 2020</span>
-                                </div>
-                                <div class="video-tile" onclick="openModal('https://www.youtube.com/embed/tPLXjfYZT0o')">
-                                    <span class="tile-play">▶</span>
-                                    <span class="tile-icon">&#9670;</span>
-                                    <span class="tile-title">Роли и классы</span>
-                                </div>
+                                <div class="video-tile" onclick="openModal('https://www.youtube.com/embed/tPLXjfYZT0o')"><span class="tile-play">▶</span><span class="tile-icon">&#9670;</span><span class="tile-title">Классика 2020</span></div>
+                                <div class="video-tile" onclick="openModal('https://www.youtube.com/embed/tPLXjfYZT0o')"><span class="tile-play">▶</span><span class="tile-icon">&#9670;</span><span class="tile-title">Роли и классы</span></div>
                             </div>
                         </div>
                     </div>
                 </div>
-
                 <!-- GURPS -->
                 <div class="system-item">
                     <div class="system-header" onclick="toggleAccordion(this)">
@@ -1156,21 +1094,9 @@
                     <div class="system-content">
                         <div class="system-content-inner">
                             <div class="videos-grid">
-                                <div class="video-tile" onclick="openModal('https://www.youtube.com/embed/tPLXjfYZT0o')">
-                                    <span class="tile-play">▶</span>
-                                    <span class="tile-icon">&#9670;</span>
-                                    <span class="tile-title">Введение в GURPS</span>
-                                </div>
-                                <div class="video-tile" onclick="openModal('https://www.youtube.com/embed/tPLXjfYZT0o')">
-                                    <span class="tile-play">▶</span>
-                                    <span class="tile-icon">&#9670;</span>
-                                    <span class="tile-title">Создание персонажа</span>
-                                </div>
-                                <div class="video-tile" onclick="openModal('https://www.youtube.com/embed/tPLXjfYZT0o')">
-                                    <span class="tile-play">▶</span>
-                                    <span class="tile-icon">&#9670;</span>
-                                    <span class="tile-title">Боевая система</span>
-                                </div>
+                                <div class="video-tile" onclick="openModal('https://www.youtube.com/embed/tPLXjfYZT0o')"><span class="tile-play">▶</span><span class="tile-icon">&#9670;</span><span class="tile-title">Введение в GURPS</span></div>
+                                <div class="video-tile" onclick="openModal('https://www.youtube.com/embed/tPLXjfYZT0o')"><span class="tile-play">▶</span><span class="tile-icon">&#9670;</span><span class="tile-title">Создание персонажа</span></div>
+                                <div class="video-tile" onclick="openModal('https://www.youtube.com/embed/tPLXjfYZT0o')"><span class="tile-play">▶</span><span class="tile-icon">&#9670;</span><span class="tile-title">Боевая система</span></div>
                             </div>
                         </div>
                     </div>
@@ -1187,6 +1113,7 @@
                 <a href="https://drive.google.com/drive/folders/1WCLZs5lXcEN3gSr6aVFSlPKowVYbj6fS?usp=sharing" target="_blank" rel="noopener">Архив версий</a>
                 <a href="https://www.radmin-vpn.com/" target="_blank" rel="noopener">Radmin VPN</a>
                 <a href="https://cloudpub.ru/" target="_blank" rel="noopener">Cloudpub</a>
+                <a href="https://github.com/flowseal/zapret-discord-youtube" target="_blank" rel="noopener">Zapret</a>
             </div>
         </div>
 
@@ -1197,7 +1124,6 @@
 </div>
 
 <script>
-    // Фон
     (function() {
         const bgUrl = 'https://www.dropbox.com/scl/fi/qyvvx56xsk8j1h81lmf7m/home-background.webp?rlkey=p6skz38llxdttgm6c13vxw9u5&st=5fzikec4&dl=1';
         const img = new Image();
@@ -1206,77 +1132,26 @@
         if (img.complete) document.body.classList.add('bg-loaded');
     })();
 
-    // Копирование в буфер обмена
     function copyToClipboard(element, text) {
         navigator.clipboard.writeText(text).then(() => {
             const originalText = element.textContent;
             element.textContent = 'Скопировано!';
             element.style.color = '#4caf50';
-            setTimeout(() => {
-                element.textContent = originalText;
-                element.style.color = '#f0a040';
-            }, 1200);
+            setTimeout(() => { element.textContent = originalText; element.style.color = '#f0a040'; }, 1200);
         });
     }
 
-    // Выезжающая панель с видео
-    function toggleVideo(btn, videoUrl) {
-        const card = btn.closest('.card');
-        const panel = card.querySelector('.video-panel');
-        const iframe = panel ? panel.querySelector('iframe') : null;
-        
-        if (!panel || !iframe) {
-            console.warn('Video panel not found in card:', card);
-            return;
-        }
-
-        const isOpen = panel.classList.contains('open');
-
-        // Закрываем все остальные панели
-        document.querySelectorAll('.video-panel.open').forEach(p => {
-            if (p !== panel) {
-                p.classList.remove('open');
-                const otherIframe = p.querySelector('iframe');
-                if (otherIframe) otherIframe.src = '';
-                const otherBtn = p.closest('.card')?.querySelector('.video-toggle-btn');
-                if (otherBtn) otherBtn.classList.remove('open');
-            }
-        });
-
-        if (isOpen) {
-            panel.classList.remove('open');
-            btn.classList.remove('open');
-            iframe.src = '';
-        } else {
-            panel.classList.add('open');
-            btn.classList.add('open');
-            iframe.src = videoUrl;
-        }
-    }
-
-    // Аккордеон для систем
     function toggleAccordion(header) {
         const item = header.parentElement;
         const content = item.querySelector('.system-content');
         const isOpen = item.classList.contains('open');
-
         document.querySelectorAll('.system-item.open').forEach(el => {
-            if (el !== item) {
-                el.classList.remove('open');
-                el.querySelector('.system-content').style.maxHeight = '0';
-            }
+            if (el !== item) { el.classList.remove('open'); el.querySelector('.system-content').style.maxHeight = '0'; }
         });
-
-        if (isOpen) {
-            item.classList.remove('open');
-            content.style.maxHeight = '0';
-        } else {
-            item.classList.add('open');
-            content.style.maxHeight = content.scrollHeight + 'px';
-        }
+        if (isOpen) { item.classList.remove('open'); content.style.maxHeight = '0'; }
+        else { item.classList.add('open'); content.style.maxHeight = content.scrollHeight + 'px'; }
     }
 
-    // Модальное окно
     function openModal(url) {
         document.getElementById('modalFrame').src = url;
         document.getElementById('videoModal').classList.add('active');
@@ -1285,9 +1160,7 @@
         document.getElementById('modalFrame').src = '';
         document.getElementById('videoModal').classList.remove('active');
     }
-    document.getElementById('videoModal').addEventListener('click', function(e) {
-        if (e.target === this) closeModal();
-    });
+    document.getElementById('videoModal').addEventListener('click', function(e) { if (e.target === this) closeModal(); });
 </script>
 </body>
 </html>
