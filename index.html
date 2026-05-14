@@ -31,6 +31,10 @@
       font-family: 'Inter', system-ui, -apple-system, sans-serif;
       color: #e8e0d0;
       line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+      /* Safari fix */
+      -webkit-backface-visibility: hidden;
     }
 
     body.bg-loaded {
@@ -48,6 +52,7 @@
       background: rgba(20, 18, 14, 0.82);
       z-index: 0;
       backdrop-filter: blur(3px);
+      -webkit-backdrop-filter: blur(3px);
     }
 
     body {
@@ -71,6 +76,7 @@
     .header img {
       height: 48px;
       filter: drop-shadow(0 2px 6px rgba(0,0,0,0.5));
+      -webkit-filter: drop-shadow(0 2px 6px rgba(0,0,0,0.5));
     }
     .header .subtitle {
       font-family: 'Cinzel', 'Times New Roman', serif;
@@ -97,6 +103,7 @@
       border-radius: 12px;
       padding: 22px 20px;
       backdrop-filter: blur(6px);
+      -webkit-backdrop-filter: blur(6px);
       box-shadow: 0 4px 16px rgba(0,0,0,0.5);
       display: flex;
       flex-direction: column;
@@ -190,6 +197,7 @@
       position: relative;
       overflow: hidden;
       backdrop-filter: blur(6px);
+      -webkit-backdrop-filter: blur(6px);
     }
     .dl-btn::after {
       content: '';
@@ -246,6 +254,7 @@
       font-size: 0.82rem;
       transition: all 0.2s;
       backdrop-filter: blur(6px);
+      -webkit-backdrop-filter: blur(6px);
     }
     .archive-btn:hover {
       border-color: #e67e22;
@@ -314,6 +323,7 @@
       padding: 22px 24px;
       margin-bottom: 16px;
       backdrop-filter: blur(6px);
+      -webkit-backdrop-filter: blur(6px);
       box-shadow: 0 4px 16px rgba(0,0,0,0.5);
     }
     .card h2 {
@@ -588,36 +598,40 @@
       align-items: center;
       justify-content: center;
       text-align: center;
-      padding: 10px;
+      padding: 12px 8px;
+      text-decoration: none;
     }
     .video-tile:hover {
       border-color: #e67e22;
       box-shadow: 0 0 0 2px rgba(230, 126, 34, 0.25);
       transform: translateY(-2px);
     }
-    .video-tile .tile-thumb {
-      font-size: 1.8rem;
-      margin-bottom: 4px;
+    .video-tile .tile-icon {
+      font-size: 1.4rem;
+      margin-bottom: 6px;
+      color: #e67e22;
+      opacity: 0.9;
     }
     .video-tile .tile-title {
-      font-size: 0.7rem;
+      font-size: 0.72rem;
       color: #e8e0d0;
       font-weight: 500;
-      line-height: 1.3;
+      line-height: 1.35;
     }
     .video-tile .tile-play {
       position: absolute;
-      top: 5px;
-      right: 6px;
-      background: rgba(200, 50, 30, 0.8);
+      top: 6px;
+      right: 8px;
+      background: rgba(200, 50, 30, 0.85);
       color: #fff;
-      width: 20px;
-      height: 20px;
+      width: 22px;
+      height: 22px;
       border-radius: 50%;
       display: flex;
       align-items: center;
       justify-content: center;
-      font-size: 0.55rem;
+      font-size: 0.6rem;
+      line-height: 1;
     }
 
     /* Модальное окно */
@@ -665,6 +679,7 @@
       align-items: center;
       justify-content: center;
       transition: all 0.2s;
+      line-height: 1;
     }
     .modal-close:hover {
       background: #f09030;
@@ -704,7 +719,7 @@
     @media (max-width: 700px) {
       .download-section { flex-direction: column; }
       .videos-grid {
-        grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+        grid-template-columns: repeat(auto-fill, minmax(130px, 1fr));
       }
     }
   </style>
@@ -741,19 +756,20 @@
     </div>
 
     <div class="btns-col">
+      <!-- Кнопки с пробелами -->
       <a href="https://www.dropbox.com/scl/fi/7nqrb2eofwei032s94o62/FoundryVTT-13.351-Setup-2.exe?rlkey=o4nhn1gf6w2pvkbv4sxlymcg9&st=wd1j9gf0&dl=1" class="dl-btn" target="_blank" rel="noopener">
         <span class="icon">🖥️</span>
-        <span class="meta"><span class="name">Скачать для Windows</span><span class="info">FoundryVTT 13.351 · Установщик .exe</span></span>
+        <span class="meta"><span class="name">Скачать для Windows</span><span class="info">FoundryVTT 13.351 &middot; Установщик .exe</span></span>
         <span class="arr">→</span>
       </a>
       <a href="https://www.dropbox.com/scl/fi/s27ice1aisl147u5etqe3/FoundryVTT-13.351.dmg?rlkey=1hp9oocklmi7tg9ox733xuu27&st=yxzzv5l4&dl=1" class="dl-btn" target="_blank" rel="noopener">
         <span class="icon">🍎</span>
-        <span class="meta"><span class="name">Скачать для macOS</span><span class="info">FoundryVTT 13.351 · Образ .dmg</span></span>
+        <span class="meta"><span class="name">Скачать для macOS</span><span class="info">FoundryVTT 13.351 &middot; Образ .dmg</span></span>
         <span class="arr">→</span>
       </a>
       <a href="https://www.dropbox.com/scl/fi/xemk4zlj65f2ugenw0o4e/FoundryVTT-Linux-13.351.zip?rlkey=9np7ajwn7qita3vtmwiz7gaoo&st=iktprsg1&dl=1" class="dl-btn" target="_blank" rel="noopener">
         <span class="icon">🐧</span>
-        <span class="meta"><span class="name">Скачать для Linux</span><span class="info">FoundryVTT 13.351 · Архив .zip</span></span>
+        <span class="meta"><span class="name">Скачать для Linux</span><span class="info">FoundryVTT 13.351 &middot; Архив .zip</span></span>
         <span class="arr">→</span>
       </a>
       <a href="https://drive.google.com/drive/folders/1WCLZs5lXcEN3gSr6aVFSlPKowVYbj6fS?usp=sharing" class="archive-btn" target="_blank" rel="noopener">
@@ -824,7 +840,7 @@
       </div>
     </div>
 
-    <!-- 3. Сервер (с обновлёнными ссылками) -->
+    <!-- 3. Сервер -->
     <div class="card">
       <h2><span class="num">3</span> Настройка сервера</h2>
       <div class="video-row">
@@ -848,7 +864,7 @@
       </div>
     </div>
 
-    <!-- 4. Гайды по системам -->
+    <!-- 4. Гайды по системам (без эмодзи в плитках) -->
     <div class="card">
       <h2>
         <span class="num">4</span> Гайды по игровым системам
@@ -870,22 +886,22 @@
               <div class="videos-grid">
                 <div class="video-tile" onclick="openModal('https://www.youtube.com/embed/tPLXjfYZT0o')">
                   <span class="tile-play">▶</span>
-                  <span class="tile-thumb">🐉</span>
+                  <span class="tile-icon">&#9670;</span>
                   <span class="tile-title">Базовые механики</span>
                 </div>
                 <div class="video-tile" onclick="openModal('https://www.youtube.com/embed/tPLXjfYZT0o')">
                   <span class="tile-play">▶</span>
-                  <span class="tile-thumb">🧙</span>
+                  <span class="tile-icon">&#9670;</span>
                   <span class="tile-title">Создание персонажа</span>
                 </div>
                 <div class="video-tile" onclick="openModal('https://www.youtube.com/embed/tPLXjfYZT0o')">
                   <span class="tile-play">▶</span>
-                  <span class="tile-thumb">⚔️</span>
+                  <span class="tile-icon">&#9670;</span>
                   <span class="tile-title">Боевая система</span>
                 </div>
                 <div class="video-tile" onclick="openModal('https://www.youtube.com/embed/tPLXjfYZT0o')">
                   <span class="tile-play">▶</span>
-                  <span class="tile-thumb">✨</span>
+                  <span class="tile-icon">&#9670;</span>
                   <span class="tile-title">Магия и заклинания</span>
                 </div>
               </div>
@@ -905,17 +921,17 @@
               <div class="videos-grid">
                 <div class="video-tile" onclick="openModal('https://www.youtube.com/embed/tPLXjfYZT0o')">
                   <span class="tile-play">▶</span>
-                  <span class="tile-thumb">🆕</span>
+                  <span class="tile-icon">&#9670;</span>
                   <span class="tile-title">Что нового в 2024</span>
                 </div>
                 <div class="video-tile" onclick="openModal('https://www.youtube.com/embed/tPLXjfYZT0o')">
                   <span class="tile-play">▶</span>
-                  <span class="tile-thumb">📋</span>
+                  <span class="tile-icon">&#9670;</span>
                   <span class="tile-title">Обновлённые классы</span>
                 </div>
                 <div class="video-tile" onclick="openModal('https://www.youtube.com/embed/tPLXjfYZT0o')">
                   <span class="tile-play">▶</span>
-                  <span class="tile-thumb">📜</span>
+                  <span class="tile-icon">&#9670;</span>
                   <span class="tile-title">Изменения правил</span>
                 </div>
               </div>
@@ -935,17 +951,17 @@
               <div class="videos-grid">
                 <div class="video-tile" onclick="openModal('https://www.youtube.com/embed/tPLXjfYZT0o')">
                   <span class="tile-play">▶</span>
-                  <span class="tile-thumb">📖</span>
+                  <span class="tile-icon">&#9670;</span>
                   <span class="tile-title">Старт в Pathfinder</span>
                 </div>
                 <div class="video-tile" onclick="openModal('https://www.youtube.com/embed/tPLXjfYZT0o')">
                   <span class="tile-play">▶</span>
-                  <span class="tile-thumb">🛡️</span>
+                  <span class="tile-icon">&#9670;</span>
                   <span class="tile-title">Создание персонажа</span>
                 </div>
                 <div class="video-tile" onclick="openModal('https://www.youtube.com/embed/tPLXjfYZT0o')">
                   <span class="tile-play">▶</span>
-                  <span class="tile-thumb">🔍</span>
+                  <span class="tile-icon">&#9670;</span>
                   <span class="tile-title">Режим разведки</span>
                 </div>
               </div>
@@ -965,17 +981,17 @@
               <div class="videos-grid">
                 <div class="video-tile" onclick="openModal('https://www.youtube.com/embed/tPLXjfYZT0o')">
                   <span class="tile-play">▶</span>
-                  <span class="tile-thumb">🌃</span>
+                  <span class="tile-icon">&#9670;</span>
                   <span class="tile-title">Мир Cyberpunk RED</span>
                 </div>
                 <div class="video-tile" onclick="openModal('https://www.youtube.com/embed/tPLXjfYZT0o')">
                   <span class="tile-play">▶</span>
-                  <span class="tile-thumb">💻</span>
+                  <span class="tile-icon">&#9670;</span>
                   <span class="tile-title">Нетраннинг</span>
                 </div>
                 <div class="video-tile" onclick="openModal('https://www.youtube.com/embed/tPLXjfYZT0o')">
                   <span class="tile-play">▶</span>
-                  <span class="tile-thumb">🔫</span>
+                  <span class="tile-icon">&#9670;</span>
                   <span class="tile-title">Бой и импланты</span>
                 </div>
               </div>
@@ -995,12 +1011,12 @@
               <div class="videos-grid">
                 <div class="video-tile" onclick="openModal('https://www.youtube.com/embed/tPLXjfYZT0o')">
                   <span class="tile-play">▶</span>
-                  <span class="tile-thumb">📼</span>
+                  <span class="tile-icon">&#9670;</span>
                   <span class="tile-title">Классика 2020</span>
                 </div>
                 <div class="video-tile" onclick="openModal('https://www.youtube.com/embed/tPLXjfYZT0o')">
                   <span class="tile-play">▶</span>
-                  <span class="tile-thumb">🕶️</span>
+                  <span class="tile-icon">&#9670;</span>
                   <span class="tile-title">Роли и классы</span>
                 </div>
               </div>
@@ -1020,17 +1036,17 @@
               <div class="videos-grid">
                 <div class="video-tile" onclick="openModal('https://www.youtube.com/embed/tPLXjfYZT0o')">
                   <span class="tile-play">▶</span>
-                  <span class="tile-thumb">🎲</span>
+                  <span class="tile-icon">&#9670;</span>
                   <span class="tile-title">Введение в GURPS</span>
                 </div>
                 <div class="video-tile" onclick="openModal('https://www.youtube.com/embed/tPLXjfYZT0o')">
                   <span class="tile-play">▶</span>
-                  <span class="tile-thumb">📝</span>
+                  <span class="tile-icon">&#9670;</span>
                   <span class="tile-title">Создание персонажа</span>
                 </div>
                 <div class="video-tile" onclick="openModal('https://www.youtube.com/embed/tPLXjfYZT0o')">
                   <span class="tile-play">▶</span>
-                  <span class="tile-thumb">🗡️</span>
+                  <span class="tile-icon">&#9670;</span>
                   <span class="tile-title">Боевая система</span>
                 </div>
               </div>
@@ -1068,7 +1084,7 @@
     if (img.complete) document.body.classList.add('bg-loaded');
   })();
 
-  // Выезжающая панель с видео (для разделов 1-3)
+  // Выезжающая панель с видео
   function toggleVideo(btn, videoUrl) {
     const card = btn.closest('.card');
     const panel = card.querySelector('.video-panel');
